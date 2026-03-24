@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingVertical="8dp"
-    android:background="?android:attr/selectableItemBackground"
-    android:weightSum="4">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/tvStudentId"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="14sp"
-        android:textColor="#333333" />
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:weightSum="4">
 
-    <TextView
-        android:id="@+id/tvClass"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="14sp"
-        android:textColor="#333333" />
+        <TextView
+            android:id="@+id/tvStudentId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#333333"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/tvSubject"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="14sp"
-        android:textColor="#333333" />
+        <TextView
+            android:id="@+id/tvClass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#333333"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/tvTeacher"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="14sp"
-        android:textColor="#333333" />
+        <TextView
+            android:id="@+id/tvSubject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#333333"
+            android:textSize="14sp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvTeacher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</layout>

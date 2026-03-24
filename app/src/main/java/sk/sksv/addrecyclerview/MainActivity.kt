@@ -14,8 +14,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import sk.sksv.addrecyclerview.databinding.ActivityMainBinding
+import sk.sksv.addrecyclerview.databinding.DialogMultipleStudentsBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,19 +60,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = StudentAdapter(DemoData.students)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = StudentAdapter(DemoData.students)
     }
 
     override fun onResume() {
@@ -123,17 +127,16 @@ class MainActivity : AppCompatActivity() {
         val matchedStudents = DemoData.students.filter { it.id.equals(scannedId, ignoreCase = true) }
         
         if (matchedStudents.size > 1) {
-            val dialogView = layoutInflater.inflate(R.layout.dialog_multiple_students, null)
-            val recyclerView = dialogView.findViewById<RecyclerView>(R.id.rvStudentDialog)
+            val dialogBinding = DialogMultipleStudentsBinding.inflate(layoutInflater)
             
-            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-            recyclerView.adapter = SelectableStudentAdapter(matchedStudents) { selectedStudent ->
+            dialogBinding.rvStudentDialog.layoutManager = LinearLayoutManager(this@MainActivity)
+            dialogBinding.rvStudentDialog.adapter = SelectableStudentAdapter(matchedStudents) { selectedStudent ->
                 // The adapter itself handles the green highlight selection.
             }
 
             AlertDialog.Builder(this)
                 .setTitle("Multiple Students Found")
-                .setView(dialogView)
+                .setView(dialogBinding.root)
                 .setPositiveButton("Done") { dialog, _ -> dialog.dismiss() }
                 .show()
         } else if (matchedStudents.size == 1) {
